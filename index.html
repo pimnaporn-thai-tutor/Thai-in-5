@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Thai in 5</title>
+<meta name="description" content="Learn beginner Thai in 5 minutes a day: verbs, pronouns and simple grammar.">
+<meta name="theme-color" content="#d6336c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Thai in 5">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday: a quick, friendly daily habit
+   IDEA a Thai tear-off day calendar: one sheet per day, coloured by the Thai colour of the weekday
+   PICTURE today's sheet: the weekday in Thai, the streak, a ring filling toward 5 minutes
+   COLOUR white or night-aubergine ground, lotus-pink band and buttons, marigold focus, weekday colour on the sheet
+   TYPE Kanit for display, Sarabun for text (both cover Thai and Latin)
+   LAYOUT one column up to 560px: pink band, sheet overlapping it, unit list below; lessons fill the screen */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#170c28);--ink:light-dark(#23123a,#f5eefc);--mute:light-dark(#6b5d7d,#b9aacb);--soft:light-dark(#f7f1fb,#22143a);--line:light-dark(#e6dcef,#3b2a55);--brand:#d6336c;--brandd:#9e1f4d;--gold:#f5a524;--ok:light-dark(#0b7a63,#45d3ae);--bad:light-dark(#c4302b,#ff7b72);--day:#ec4f9a;--dayink:#fff}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Sarabun,Thonburi,"Noto Sans Thai",system-ui,sans-serif;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+h1,h2,h3,.disp{font-family:Kanit,Sarabun,Thonburi,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.15;margin:0}
+.wrap{max-width:560px;margin:0 auto}
+.band{background:var(--brand);color:#fff;padding:calc(14px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 88px max(16px,env(safe-area-inset-left,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font:600 22px/1 Kanit,Sarabun,sans-serif;display:flex;align-items:center;gap:10px}
+.logo b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--gold);color:#23123a;font-size:20px}
+.tools{display:flex;gap:8px}
+.ib{width:44px;height:44px;border-radius:12px;border:0;background:rgba(255,255,255,.18);color:inherit;display:grid;place-items:center}
+.ib.plain{background:var(--soft);color:var(--ink)}
+.hello{margin:18px 0 0;font-size:clamp(28px,7vw,38px);line-height:1.08;text-wrap:balance}
+.hello+p{margin:6px 0 0;opacity:.92}
+main{padding:0 max(16px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet{margin-top:-66px;background:var(--bg);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 14px 30px -16px rgba(35,18,58,.45)}
+.strip{background:var(--day);color:var(--dayink);height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font:600 15px Kanit,Sarabun,sans-serif}
+.holes{display:flex;gap:26px}
+.holes i{width:12px;height:12px;border-radius:50%;background:var(--bg);box-shadow:inset 0 2px 2px rgba(0,0,0,.3)}
+.sbody{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px 18px 6px}
+.wd{font:600 clamp(34px,9.5vw,50px)/1.3 Kanit,Sarabun,sans-serif;margin:0}
+.ro{color:var(--mute);font-size:15px}
+.dnote{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:15px;color:var(--mute)}
+.dnote i{width:14px;height:14px;border-radius:4px;background:var(--day);flex:none}
+.streak{display:flex;align-items:baseline;gap:8px;margin-top:14px}
+.streak b{font:700 42px/1 Kanit,sans-serif;font-variant-numeric:tabular-nums}
+.streak span{color:var(--mute)}
+.ring{width:124px;height:124px;display:block}
+.ring .tr{stroke:var(--soft)}
+.ring .fl{stroke:var(--day);transition:stroke-dashoffset .6s}
+.ring text{fill:var(--ink);font-family:Kanit,Sarabun,sans-serif}
+.today{border-top:2px dashed var(--line);margin:12px 18px 0;padding:14px 0 18px}
+.lbl{color:var(--mute);font-size:15px;margin:0}
+.today h2{font-size:23px;margin:2px 0 14px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;padding:8px 18px;border:0;border-radius:14px;background:var(--brand);color:#fff;font:600 18px Kanit,Sarabun,sans-serif;box-shadow:0 4px 0 var(--brandd)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--brandd)}
+.btn.ghost{background:var(--soft);color:var(--ink);box-shadow:0 4px 0 var(--line)}
+.btn[disabled]{opacity:.45;cursor:default;transform:none}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gq{margin:0 0 12px;font-size:16px}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin:28px 0 10px}
+.sec h3{font-size:20px}
+.units{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.unit{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;width:100%;text-align:left;padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:var(--bg);min-height:66px}
+.num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:600 18px Kanit,sans-serif;border:2px solid var(--line)}
+.unit[disabled]{opacity:.5;cursor:default}
+.unit.done .num{background:var(--brand);border-color:var(--brand);color:#fff}
+.unit.next{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 22%,transparent)}
+.unit b{display:block;font:600 17px/1.3 Kanit,Sarabun,sans-serif}
+.unit .sub{color:var(--mute);font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{font:600 13px Kanit,sans-serif;padding:3px 9px;border-radius:99px;background:var(--soft);color:var(--mute);white-space:nowrap}
+.unit.next .tag{background:var(--brand);color:#fff}
+.foot-note{color:var(--mute);font-size:14px;margin:22px 0 0;text-align:center}
+/* lesson */
+.screen{min-height:100%;display:flex;flex-direction:column}
+.lbar{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;max-width:600px;width:100%;margin:0 auto}
+.prog{flex:1;height:12px;border-radius:99px;background:var(--soft);overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--brand);border-radius:99px;transition:width .3s}
+.clock{font:600 15px Kanit,sans-serif;font-variant-numeric:tabular-nums;color:var(--mute);min-width:3.4em;text-align:right;white-space:nowrap}
+.stage{flex:1;padding:8px 16px 20px;max-width:560px;width:100%;margin:0 auto}
+.foot{position:sticky;bottom:0;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.foot.ok{background:color-mix(in srgb,var(--ok) 13%,var(--bg))}
+.foot.bad{background:color-mix(in srgb,var(--bad) 12%,var(--bg))}
+.fb{max-width:560px;margin:0 auto 10px}
+.fb b{font:600 19px Kanit,Sarabun,sans-serif;display:block}
+.foot.ok .fb b{color:var(--ok)}
+.foot.bad .fb b{color:var(--bad)}
+.fb .th{font-size:20px}
+.foot .btn{max-width:560px;margin:0 auto}
+.kick{color:var(--mute);font-size:15px;margin:6px 0 4px}
+.q{font-size:24px;margin:0 0 18px;text-wrap:balance}
+.card{border:1px solid var(--line);border-radius:22px;padding:22px 18px;text-align:center;background:var(--soft);position:relative}
+.card .strip2{position:absolute;inset:0 0 auto;height:10px;background:var(--day);border-radius:22px 22px 0 0}
+.big{font:600 clamp(50px,15vw,76px)/1.35 Sarabun,Thonburi,sans-serif;margin:6px 0 0;word-break:keep-all}
+.big.sm{font-size:clamp(36px,10vw,52px)}
+.rom{font-size:21px;color:var(--mute);margin:0 0 14px}
+.say{width:56px;height:56px;border-radius:50%;border:0;background:var(--brand);color:#fff;display:inline-grid;place-items:center;box-shadow:0 3px 0 var(--brandd);flex:none}
+.say.s{width:44px;height:44px}
+.say.xl{width:96px;height:96px}
+.mean{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.mean b{display:block;font:600 24px/1.25 Kanit,Sarabun,sans-serif}
+.mean p{margin:6px 0 0;color:var(--mute)}
+.reveal{margin-top:16px;border:2px dashed var(--line);background:transparent;border-radius:14px;min-height:54px;width:100%;color:var(--mute)}
+.opts{display:grid;gap:10px}
+@media(min-width:520px){.opts.two{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.opt{min-height:58px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:var(--bg);text-align:left;display:flex;gap:12px;align-items:center;box-shadow:0 3px 0 var(--line)}
+.opt .k{flex:none;width:26px;height:26px;border-radius:7px;border:1px solid var(--line);display:grid;place-items:center;font-size:13px;color:var(--mute)}
+.opt .t{font-size:23px;line-height:1.35}
+.opt .r{display:block;font-size:14px;color:var(--mute);line-height:1.2}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--bg))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--bg))}
+.opt[disabled]{cursor:default}
+.slots{min-height:84px;border-bottom:2px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;padding:8px 0 12px;margin-bottom:18px}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tile{border:2px solid var(--line);border-radius:12px;background:var(--bg);padding:5px 12px;min-height:56px;box-shadow:0 3px 0 var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.25}
+.tile .t{font-size:22px}
+.tile .r{font-size:13px;color:var(--mute)}
+.tile.used{visibility:hidden}
+.lesson h2{font-size:clamp(26px,7vw,32px);margin:4px 0 10px}
+.lesson p{margin:0 0 10px}
+.pat{background:var(--soft);border-left:6px solid var(--day);border-radius:12px;padding:12px 14px;font:600 18px/1.4 Kanit,Sarabun,sans-serif;margin:12px 0 16px}
+.ex{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.ex .th{font-size:24px;line-height:1.4}
+.ex .r{color:var(--mute);font-size:15px}
+.ex .e{font-size:16px}
+.done{text-align:center;padding-top:10px}
+.done h1{font-size:clamp(32px,9vw,44px);margin:12px 0 6px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}
+.stats div{background:var(--soft);border-radius:16px;padding:14px 8px}
+.stats b{display:block;font:700 28px/1.1 Kanit,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats span{font-size:14px;color:var(--mute)}
+.cta{display:block;margin-top:22px;padding:16px;border-radius:16px;background:var(--day);color:var(--dayink);font:600 18px Kanit,Sarabun,sans-serif;text-decoration:none}
+.stack{display:grid;gap:12px;margin-top:8px}
+/* word bank and settings */
+.search{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--soft);padding:10px 14px;font-size:16px;margin:4px 0 8px}
+.grp{margin:22px 0 6px;font-size:19px}
+.w{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.w .th{font-size:23px;line-height:1.35}
+.w .r{color:var(--mute);font-size:15px}
+.w.new .th,.w.new .e{opacity:.55}
+.w .e small{display:block;color:var(--mute);font-size:14px;line-height:1.35}
+.modal{position:fixed;inset:0;background:rgba(23,12,40,.55);display:grid;place-items:end center;padding:16px;z-index:9}
+.panel{background:var(--bg);color:var(--ink);border-radius:22px;padding:20px;width:100%;max-width:520px;margin-bottom:env(safe-area-inset-bottom,0px)}
+.panel h2{font-size:24px;margin-bottom:12px}
+.opt.on{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,var(--bg))}
+.panel .opts{margin:6px 0 16px}
+.danger{color:var(--bad)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="home">
+  <header class="band">
+    <div class="wrap">
+      <div class="top">
+        <div class="logo"><b aria-hidden="true">ก</b>Thai in 5</div>
+        <div class="tools">
+          <button class="ib" id="toBank" aria-label="Word bank"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/></svg></button>
+          <button class="ib" id="toSet" aria-label="Settings"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></button>
+        </div>
+      </div>
+      <h1 class="hello" id="hello">5 minutes of Thai today</h1>
+      <p>Short daily lessons for beginners: verbs, "I" and "you", and simple grammar.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="sheet" aria-label="Today">
+      <div class="strip"><div class="holes"><i></i><i></i></div><span id="sdate"></span><div class="holes"><i></i><i></i></div></div>
+      <div class="sbody">
+        <div>
+          <p class="wd th" id="wd"></p>
+          <div class="ro" id="wdro"></div>
+          <div class="dnote"><i></i><span id="wdnote"></span></div>
+          <div class="streak"><b id="streak">0</b><span id="streakl">day streak</span></div>
+        </div>
+        <svg class="ring" viewBox="0 0 124 124" role="img" aria-label="Minutes today">
+          <circle class="tr" cx="62" cy="62" r="50" fill="none" stroke-width="14"/>
+          <circle class="fl" id="ringf" cx="62" cy="62" r="50" fill="none" stroke-width="14" stroke-linecap="round" transform="rotate(-90 62 62)" stroke-dasharray="314.16" stroke-dashoffset="314.16"/>
+          <text x="62" y="60" text-anchor="middle" font-size="30" font-weight="700" id="ringn">0</text>
+          <text x="62" y="82" text-anchor="middle" font-size="14" id="ringl">of 5 min</text>
+        </svg>
+      </div>
+      <div class="today">
+        <p class="lbl" id="tlbl">Today's lesson</p>
+        <h2 id="ttitle"></h2>
+        <div id="gpick" hidden>
+          <p class="gq">First: are you learning as a man or a woman? Thai changes the word for "I" and the polite ending.</p>
+          <div class="row2"><button class="btn ghost" data-g="m">Man · ผม / ครับ</button><button class="btn ghost" data-g="f">Woman · ฉัน / ค่ะ</button></div>
+        </div>
+        <button class="btn" id="start">Start</button>
+      </div>
+    </section>
+    <div class="sec"><h3>Your path</h3><span class="lbl" id="pathc"></span></div>
+    <ol class="units" id="units"></ol>
+    <p class="foot-note">One unit a day takes about 5 minutes. After unit 9, a daily review keeps every word fresh.</p>
+  </main>
+</div>
+
+<div id="lesson" class="screen" hidden>
+  <div class="lbar">
+    <button class="ib plain" id="quit" aria-label="Close lesson"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="prog"><i id="prog"></i></div>
+    <span class="clock" id="clock">0:00</span>
+  </div>
+  <div class="stage" id="stage"></div>
+  <div class="foot" id="foot"><div class="fb" id="fb" hidden></div><button class="btn" id="go">Continue</button></div>
+</div>
+
+<div id="donescr" class="screen" hidden>
+  <div class="stage done" id="donebox"></div>
+</div>
+
+<div id="bankscr" class="screen" hidden>
+  <div class="lbar"><button class="ib plain" id="bankBack" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><h2 style="font-size:24px">Word bank</h2></div>
+  <div class="stage"><input class="search" id="q" type="search" placeholder="Search Thai, romanization or English" aria-label="Search words"><div id="bank"></div></div>
+</div>
+
+<div class="modal" id="setm" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="seth">
+    <h2 id="seth">Settings</h2>
+    <p class="lbl">I speak Thai as a</p>
+    <div class="opts two" id="setg"><button class="opt" data-sg="m">Man · ผม / ครับ</button><button class="opt" data-sg="f">Woman · ฉัน / ค่ะ</button></div>
+    <p class="lbl">Sound</p>
+    <div class="opts two" id="sets"><button class="opt" data-ss="1">On</button><button class="opt" data-ss="0">Off</button></div>
+    <p class="lbl" id="voiceNote"></p>
+    <div class="stack"><button class="btn ghost danger" id="reset">Reset all progress</button><button class="btn" id="setClose">Done</button></div>
+  </div>
+</div>
+
+<script>
+{
+/* Put your booking page here to show a "book a lesson" button after each lesson. */
+const CONFIG={lessonUrl:'',lessonLabel:'Speak Thai faster: book a lesson with a Thai teacher',goalMin:5};
+
+const KEY='thai5_v1';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const T=(th,ro)=>[th,ro];
+
+/* ---------- content (from the "For beginners" doc, corrected) ---------- */
+const RAW=[
+['v1','verb','ไป','bpai','to go'],['v2','verb','มา','maa','to come'],['v3','verb','กิน','gin','to eat'],['v4','verb','ดื่ม','dùuem','to drink'],['v5','verb','นอน','naawn','to sleep','Also: to lie down.'],
+['v6','verb','ตื่น','dtùuen','to wake up'],['v7','verb','นั่ง','nâng','to sit'],['v8','verb','ยืน','yuuen','to stand'],['v9','verb','เดิน','dooen','to walk'],['v10','verb','เล่น','lên','to play'],
+['v11','verb','ดู','duu','to see, to watch'],['v12','verb','ฟัง','fang','to listen'],['v13','verb','พูด','phûud','to speak'],['v14','verb','ชอบ','châawp','to like'],['v15','verb','รัก','rák','to love'],
+['v16','verb','เกลียด','glìiat','to hate'],['v17','verb','มี','mii','to have','Also: there is / there are.'],['v18','verb','เป็น','bpen','to be (who or what)','ผมเป็นครู = I am a teacher. Not used before adjectives.'],['v19','verb','ใช้','chái','to use'],['v20','verb','ทำ','tham','to do, to make'],
+['v21','verb','เรียน','riian','to learn, to study'],['v22','verb','อ่าน','àan','to read'],['v23','verb','เขียน','khǐian','to write'],['v24','verb','ซื้อ','súue','to buy'],['v25','verb','ขาย','khǎay','to sell'],
+['v26','verb','ช่วย','chûuay','to help'],['v27','verb','อยาก','yàak','to want (to)','อยาก + verb: อยากกิน = want to eat.'],['v28','verb','รู้','rúu','to know'],['v29','verb','อยู่','yùu','to be at, to live','คุณอยู่ที่ไหน = Where are you? / Where do you live?'],['v30','verb','ถาม','thǎam','to ask'],
+['i1','i','ผม','phǒm','I (men, polite)','The everyday "I" for men. End with ครับ khráp to sound polite.'],
+['i2','i','ฉัน','chán','I (women, standard)','The everyday "I" for women. End with ค่ะ khâ to sound polite.'],
+['i3','i','เรา','rao','I / we (casual)','Anyone can use it. It also means "we".'],
+['i4','i','หนู','nǔu','I (to elders: women, kids)','Literally "mouse". Sounds sweet and humble with older people.'],
+['i5','i','พี่ / น้อง','phîi / náawng','I (as the older / younger one)','Thais often call themselves by role: พี่ if you are older, น้อง if younger.'],
+['i6','i','เค้า','kháo','I (cute, between couples)','Playful and affectionate. Not for work.'],
+['i7','i','กู','guu','I (rude, close friends only)','Very blunt. Only with close friends who talk this way.'],
+['y1','you','คุณ','khun','you (polite)','Safe with anyone: strangers, customers, at work.'],
+['y2','you','เธอ','thoe','you (to a woman or close friend)','Informal. Common between friends and in songs.'],
+['y3','you','แก','gae','you (very casual)','Playful between close friends. Rude to strangers.'],
+['y4','you','ตัวเอง','dtuua-eeng','you (cute, between couples)','Literally "yourself".'],
+['y5','you','ที่รัก','thîi-rák','darling, dear','For your partner.'],
+['y6','you','พี่ / น้อง','phîi / náawng','you (to someone older / younger)','Call an older colleague พี่ and a young waiter น้อง. Friendly and respectful.'],
+['y7','you','มึง','mueng','you (rude, close friends only)','Goes with กู. Can start a fight if used wrongly.'],
+['d1','desc','แดง','daaeng','red'],['d2','desc','ใหญ่','yài','big'],['d3','desc','เร็ว','reo','fast'],
+['d4','desc','มาก','mâak','very, a lot','Goes after the word: เร็วมาก = very fast.'],
+['d5','desc','คน','khon','counting word for people','เพื่อนสามคน = three friends'],
+['d6','desc','ตัว','dtuua','counting word for animals','แมวสามตัว = three cats'],
+['d7','desc','เล่ม','lêm','counting word for books','หนังสือสองเล่ม = two books']];
+const IT={};RAW.forEach(([id,g,th,ro,en,note])=>IT[id]={id,g,th,ro,en,note:note||''});
+const w=id=>T(IT[id].th,IT[id].ro);
+const X={khao:T('ข้าว','khâao'),naam:T('น้ำ','náam'),school:T('โรงเรียน','roong-riian'),coffee:T('กาแฟ','gaa-faae'),song:T('เพลง','phleeng'),tv:T('ทีวี','thii-wii'),thai:T('ภาษาไทย','phaa-sǎa thai'),teacher:T('ครู','khruu'),car:T('รถ','rót'),book:T('หนังสือ','nǎng-sǔue'),football:T('ฟุตบอล','fút-bawn'),cat:T('แมว','maaeo'),house:T('บ้าน','bâan'),he:T('เขา','khǎo'),two:T('สอง','sǒong'),three:T('สาม','sǎam'),friend:T('เพื่อน','phûean'),mai:T('ไหม','mái'),arai:T('อะไร','à-rai'),nai:T('ไหน','nǎi'),thinai:T('ที่ไหน','thîi-nǎi'),not:T('ไม่','mâi'),gl:T('กำลัง','gam-lang'),ja:T('จะ','jà'),laew:T('แล้ว','láaeo'),yangmai:T('ยังไม่','yang mâi'),trip:T('เที่ยว','thîao'),hello:T('สวัสดี','sà-wàt-dii'),thanks:T('ขอบคุณ','khàawp-khun'),pretty:T('สวย','sǔuai')};
+const I=['{I}'],P=['{P}'];
+const L={
+order:{t:'Thai word order',p:'Subject + Verb + Object',b:['Same order as English. Thai verbs never change form: กิน means eat, eats, ate and eating.'],ex:[{t:[I,w('v3'),X.khao],en:'I eat rice.'},{t:[w('i3'),w('v1'),X.school],en:'We go to school.'},{t:[X.he,w('v4'),X.naam],en:'He / she drinks water.'}]},
+polite:{t:'Sound polite: ครับ / ค่ะ',p:'Sentence + ครับ khráp (men) / ค่ะ khâ (women)',b:['Put ครับ (if you are a man) or ค่ะ (if you are a woman) at the end of a sentence. It makes anything you say sound polite.','Women use คะ khá, with a high tone, at the end of questions.'],ex:[{t:[X.hello,P],en:'Hello.'},{t:[X.thanks,P],en:'Thank you.'},{t:[I,w('v10'),X.football,P],en:'I play football.'}]},
+ipro:{t:'Saying "I"',p:'Men: ผม phǒm  ·  Women: ฉัน chán',b:['Thai has many words for "I". Start with these two. Pick the others by who you talk to.','Many Thais use their own nickname instead of "I": "Noi is hungry" means "I am hungry".'],ex:[{t:[I,w('v4'),X.coffee],en:'I drink coffee.'},{t:[w('i3'),w('v3'),X.khao],en:'We eat rice.'}]},
+neg:{t:'Saying "not"',p:'ไม่ mâi + verb',b:['Put ไม่ right before the verb. Nothing else changes.'],ex:[{t:[I,X.not,w('v14'),X.coffee],en:"I don't like coffee."},{t:[w('i3'),X.not,w('v1')],en:"We're not going."},{t:[X.he,X.not,w('v11'),X.tv],en:"He doesn't watch TV."}]},
+be:{t:'เป็น, มี and the missing "is"',p:'เป็น bpen = am/is/are (who or what)  ·  มี mii = have',b:['Use เป็น to say what someone is: a teacher, a student, a doctor.','Do not use เป็น before describing words. "She is beautiful" is just เขาสวย: "she beautiful".'],ex:[{t:[I,w('v18'),X.teacher],en:'I am a teacher.'},{t:[X.he,X.pretty],en:'She is beautiful.'},{t:[I,w('v17'),X.car],en:'I have a car.'}]},
+ypro:{t:'Saying "you"',p:'Start with คุณ khun',b:['คุณ is polite and safe with everyone: strangers, customers, colleagues.','Close friends switch to เธอ, แก or even มึง. Couples use ตัวเอง or ที่รัก. Listen first, then copy what your friends use.'],ex:[{t:[w('y1'),w('v13'),X.thai],en:'You speak Thai.'},{t:[w('y5'),I,w('v15'),w('y1')],en:'Darling, I love you.'}]},
+ques:{t:'Asking questions',p:'Yes/no: sentence + ไหม mái  ·  Question words go at the end',b:['Add ไหม at the end to make a yes/no question. To answer "yes", repeat the verb: ไป "(I\'m) going". "No" is ไม่ + verb: ไม่ไป.','Question words: อะไร à-rai (what), ใคร khrai (who), ที่ไหน / ไหน thîi-nǎi (where), เมื่อไร mûea-rai (when), ยังไง yang-ngai (how).'],ex:[{t:[w('y1'),w('v1'),X.mai],en:'Are you going?'},{t:[w('y1'),w('v3'),X.arai],en:'What are you eating?'},{t:[w('y1'),w('v1'),X.nai],en:'Where are you going?'}]},
+time:{t:'Now, later, already',p:'กำลัง + verb = -ing  ·  จะ + verb = will  ·  verb + แล้ว = already',b:['Thai verbs never change. Small words around the verb show the time.','ยังไม่ yang mâi + verb means "not yet".'],ex:[{t:[I,X.gl,w('v3'),X.khao],en:"I'm eating."},{t:[w('i3'),X.ja,w('v1'),X.trip],en:'We will go on a trip.'},{t:[I,w('v3'),X.laew],en:"I've already eaten."},{t:[X.yangmai,w('v3')],en:"I haven't eaten yet."}]},
+desc:{t:'Describing and counting',p:'Noun + describing word  ·  Noun + number + counting word',b:['Describing words come after the thing: รถแดง is "car red", a red car. มาก after a word means "very".','To count, say the thing, the number, then a counting word: คน for people, ตัว for animals, เล่ม for books.'],ex:[{t:[X.car,w('d1')],en:'a red car'},{t:[w('v9'),w('d3'),w('d4')],en:'walk very fast'},{t:[X.book,X.two,w('d7')],en:'two books'},{t:[X.friend,X.three,w('d5')],en:'three friends'}]}};
+const UNITS=[
+{t:'First verbs + word order',items:['v1','v2','v3','v4','v5'],l:'order',s:[{t:[I,w('v3'),X.khao],en:'I eat rice.'},{t:[w('i3'),w('v1'),X.school],en:'We go to school.'},{t:[X.he,w('v4'),X.naam],en:'He drinks water.'}]},
+{t:'Body verbs + polite endings',items:['v6','v7','v8','v9','v10'],l:'polite',s:[{t:[X.hello,P],en:'Hello.'},{t:[X.thanks,P],en:'Thank you.'},{t:[I,w('v10'),X.football],en:'I play football.'}]},
+{t:'Saying "I"',items:['i1','i2','i3','i4','i5','i6','i7'],l:'ipro',s:[{t:[I,w('v4'),X.coffee],en:'I drink coffee.'},{t:[w('i3'),w('v3'),X.khao],en:'We eat rice.'}]},
+{t:'Senses and feelings + "not"',items:['v11','v12','v13','v14','v15'],l:'neg',s:[{t:[I,X.not,w('v14'),X.coffee],en:"I don't like coffee."},{t:[I,w('v13'),X.thai],en:'I speak Thai.'},{t:[w('i3'),X.not,w('v11'),X.tv],en:"We don't watch TV."},{t:[I,w('v12'),X.song],en:'I listen to music.'}]},
+{t:'Have, be, use + เป็น',items:['v16','v17','v18','v19','v20'],l:'be',s:[{t:[I,w('v18'),X.teacher],en:'I am a teacher.'},{t:[I,w('v17'),X.car],en:'I have a car.'},{t:[X.he,X.pretty],x:[w('v18')],en:'She is beautiful.'}]},
+{t:'Saying "you"',items:['y1','y2','y3','y4','y5','y6','y7'],l:'ypro',s:[{t:[w('y1'),w('v13'),X.thai],en:'You speak Thai.'},{t:[w('y5'),I,w('v15'),w('y1')],alt:[[I,w('v15'),w('y1'),w('y5')]],en:'Darling, I love you.'}]},
+{t:'Study and shop + questions',items:['v21','v22','v23','v24','v25'],l:'ques',s:[{t:[w('y1'),w('v1'),X.mai],en:'Are you going?'},{t:[w('y1'),w('v3'),X.arai],en:'What are you eating?'},{t:[w('y1'),w('v21'),X.thai,X.mai],en:'Do you study Thai?'},{t:[I,w('v22'),X.book],en:'I read a book.'}]},
+{t:'Want, know, live + time words',items:['v26','v27','v28','v29','v30'],l:'time',s:[{t:[I,w('v27'),w('v3'),X.khao],en:'I want to eat rice.'},{t:[w('i3'),X.ja,w('v1'),X.trip],en:'We will go on a trip.'},{t:[I,w('v3'),X.laew],en:"I've already eaten."},{t:[I,X.not,w('v28')],en:"I don't know."},{t:[w('y1'),w('v29'),X.thinai],en:'Where do you live?'}]},
+{t:'Describing and counting',items:['d1','d2','d3','d4','d5','d6','d7'],l:'desc',s:[{t:[X.car,w('d1')],en:'a red car'},{t:[X.house,w('d2')],en:'a big house'},{t:[w('v9'),w('d3'),w('d4')],en:'walk very fast'},{t:[X.book,X.two,w('d7')],en:'two books'},{t:[X.cat,X.three,w('d6')],en:'three cats'}]}];
+const GROUPS=[['verb','30 essential verbs'],['i','Saying "I"'],['you','Saying "you"'],['desc','Describing and counting']];
+const DAYS=[['อาทิตย์','aa-thít','Sunday','red','#e53935','#fff'],['จันทร์','jan','Monday','yellow','#f4c20d','#23123a'],['อังคาร','ang-khaan','Tuesday','pink','#ec4f9a','#fff'],['พุธ','phút','Wednesday','green','#2e9e5b','#fff'],['พฤหัสบดี','phá-rúe-hàt','Thursday','orange','#f57c00','#23123a'],['ศุกร์','sùk','Friday','light blue','#3aa6e0','#23123a'],['เสาร์','sǎo','Saturday','purple','#7b4bc4','#fff']];
+const MON=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+
+/* ---------- state ---------- */
+const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>dk(new Date());
+const addDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return dk(d)};
+const fresh=()=>({learned:{},done:{},streak:0,last:'',day:'',secs:0,g:'',sound:true});
+let S=fresh();
+try{S=Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const dayRoll=()=>{if(S.day!==today()){S.day=today();S.secs=0}};
+const streakNow=()=>(S.last===today()||S.last===addDays(-1))?S.streak:0;
+const nextUnit=()=>UNITS.findIndex((u,i)=>!S.done[i]);
+const res=x=>x[0]==='{I}'?(S.g==='f'?T('ฉัน','chán'):T('ผม','phǒm')):x[0]==='{P}'?(S.g==='f'?T('ค่ะ','khâ'):T('ครับ','khráp')):x;
+const TH=t=>t.map(res).map(x=>x[0]).join('');
+const RO=t=>t.map(res).map(x=>x[1]).join(' ');
+function grade(id,ok){const l=S.learned[id]||{b:0};l.b=ok?Math.min((l.b||0)+1,5):1;l.due=addDays(ok?[0,1,2,4,7,14][l.b]:1);S.learned[id]=l}
+
+/* ---------- speech ---------- */
+let voice=null;
+const pickVoice=()=>{try{const vs=speechSynthesis.getVoices();voice=vs.find(v=>/^th/i.test(v.lang))||null}catch(e){voice=null}};
+if('speechSynthesis' in window){pickVoice();try{speechSynthesis.addEventListener('voiceschanged',pickVoice)}catch(e){}}
+function say(text){if(!S.sound||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='th-TH';if(voice)u.voice=voice;u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
+const SND='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const sayBtn=(th,c)=>`<button class="say ${c||''}" data-say="${esc(th)}" aria-label="Play ${esc(th)}">${SND}</button>`;
+
+/* ---------- screens ---------- */
+const scr=id=>{['home','lesson','donescr','bankscr'].forEach(s=>$('#'+s).hidden=s!==id);window.scrollTo(0,0)};
+function home(){
+  dayRoll();const d=new Date(),D=DAYS[d.getDay()],r=document.documentElement;
+  r.style.setProperty('--day',D[4]);r.style.setProperty('--dayink',D[5]);
+  $('#sdate').textContent=d.getDate()+' '+MON[d.getMonth()]+' '+(d.getFullYear()+543);
+  $('#wd').textContent='วัน'+D[0];$('#wdro').textContent='wan '+D[1]+' · '+D[2];
+  $('#wdnote').textContent='In Thailand, '+D[2]+"'s colour is "+D[3]+'.';
+  const st=streakNow();$('#streak').textContent=st;
+  const goal=CONFIG.goalMin*60,p=Math.min(S.secs/goal,1);
+  $('#ringf').setAttribute('stroke-dashoffset',(314.16*(1-p)).toFixed(1));
+  $('#ringn').textContent=Math.floor(S.secs/60);$('#ringl').textContent='of '+CONFIG.goalMin+' min';
+  const n=nextUnit(),doneToday=S.last===today();
+  $('#hello').textContent=doneToday?(S.secs>=goal?'Done for today. See you tomorrow!':'Nice work today'):'5 minutes of Thai today';
+  $('#tlbl').textContent=n<0?'Today: daily review':doneToday?'Up next':"Today's lesson";
+  $('#ttitle').textContent=n<0?'Mixed practice of everything you know':'Unit '+(n+1)+' · '+UNITS[n].t;
+  $('#gpick').hidden=!!S.g;$('#start').hidden=!S.g;
+  $('#start').textContent=n<0?'Start review':doneToday?'Keep going':'Start';
+  const dn=Object.keys(S.done).length;$('#pathc').textContent=dn+' of '+UNITS.length+' done';
+  $('#units').innerHTML=UNITS.map((u,i)=>{const done=!!S.done[i],nx=i===n;return `<li><button class="unit ${done?'done':''} ${nx?'next':''}" data-u="${i}"><span class="num">${i+1}</span><span><b>${esc(u.t)}</b><span class="sub th">${esc(u.items.map(id=>IT[id].th).join(' '))}</span></span><span class="tag">${done?'Redo':nx?'Next':'5 min'}</span></button></li>`}).join('')+
+  (n<0?'':`<li><button class="unit" data-u="review" ${dn?'':'disabled'}><span class="num">↻</span><span><b>Daily review</b><span class="sub">${dn?'Practise words you have learned':'Unlocks after unit 1'}</span></span><span class="tag">3 min</span></button></li>`);
+  scr('home');
+}
+
+/* ---------- sessions ---------- */
+let SES=null,timer=null;
+const MODES=()=>voice?['th2en','en2th','listen']:['th2en','en2th'];
+function mcStep(it,i){const m=(it.g==='i'||it.g==='you')?(i%2?'en2th':'th2en'):MODES()[i%MODES().length];return{k:'mc',it,m}}
+function dueIds(exclude){const t=today();return shuffle(Object.keys(S.learned).filter(id=>IT[id]&&!exclude.includes(id)&&S.learned[id].due<=t))}
+function startUnit(n){
+  const u=UNITS[n],st=[{k:'lesson',l:L[u.l]}];
+  u.items.forEach(id=>st.push({k:'learn',it:IT[id]}));
+  shuffle(u.items.slice()).forEach((id,i)=>st.push(mcStep(IT[id],i)));
+  u.s.forEach(s=>st.push({k:'build',s}));
+  dueIds(u.items).slice(0,4).forEach((id,i)=>st.push(mcStep(IT[id],i+1)));
+  begin({kind:'unit',n,steps:st,newN:u.items.length});
+}
+function startReview(){
+  let ids=dueIds([]);const all=shuffle(Object.keys(S.learned).filter(id=>IT[id]));
+  all.forEach(id=>{if(ids.length<8&&!ids.includes(id))ids.push(id)});ids=ids.slice(0,8);
+  const st=ids.map((id,i)=>mcStep(IT[id],i));
+  const ss=shuffle(UNITS.filter((u,i)=>S.done[i]).flatMap(u=>u.s)).slice(0,3);ss.forEach(s=>st.splice(Math.floor(Math.random()*(st.length+1)),0,{k:'build',s}));
+  if(!st.length){startUnit(0);return}
+  begin({kind:'review',steps:st,newN:0});
+}
+function begin(o){
+  if(!S.g)return;
+  SES=Object.assign(o,{i:0,right:0,tot:0,retried:new Set()});dayRoll();scr('lesson');step();
+  clearInterval(timer);timer=setInterval(()=>{if(document.visibilityState==='visible'&&!$('#lesson').hidden){dayRoll();S.secs++;clock();if(S.secs%5===0)save()}},1000);clock();
+}
+function clock(){const s=S.secs;$('#clock').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function foot(state,html,label,dis){const f=$('#foot');f.className='foot'+(state?' '+state:'');const fb=$('#fb');fb.hidden=!html;fb.innerHTML=html||'';const g=$('#go');g.textContent=label;g.disabled=!!dis}
+let onGo=null;
+function step(){
+  const st=SES.steps[SES.i];$('#prog').style.width=(SES.i/SES.steps.length*100)+'%';SES.ans=false;const sg=$('#stage');
+  if(st.k==='lesson'){
+    const l=st.l;sg.innerHTML=`<div class="lesson"><p class="kick">Grammar in 1 minute</p><h2>${esc(l.t)}</h2><div class="pat">${esc(l.p)}</div>${l.b.map(p=>`<p>${esc(p)}</p>`).join('')}${l.ex.map(e=>`<div class="ex"><div><div class="th">${esc(TH(e.t))}</div><div class="r">${esc(RO(e.t))}</div><div class="e">${esc(e.en)}</div></div>${sayBtn(TH(e.t),'s')}</div>`).join('')}</div>`;
+    foot('','','Got it');onGo=next;
+  }else if(st.k==='learn'){
+    const it=st.it;sg.innerHTML=`<p class="kick">New word</p><div class="card"><div class="strip2"></div><p class="big th ${it.th.length>5?'sm':''}">${esc(it.th)}</p><p class="rom">${esc(it.ro)}</p>${sayBtn(it.th)}<div id="mean" hidden class="mean"><b>${esc(it.en)}</b>${it.note?`<p>${esc(it.note)}</p>`:''}</div><button class="reveal" id="rv">Tap to see the meaning</button></div>`;
+    $('#rv').onclick=()=>{$('#mean').hidden=false;$('#rv').hidden=true;say(it.th);foot('','','Next')};
+    foot('','','Show meaning');onGo=()=>{if($('#mean').hidden){$('#rv').click()}else next()};
+  }else if(st.k==='mc')mc(st,sg);else build(st,sg);
+}
+function opts(it){
+  const pool=shuffle(RAW.map(r=>IT[r[0]]).filter(x=>x.g===it.g||(it.g==='desc'&&x.g==='verb')));const out=[it];
+  for(const x of pool){if(out.length>=4)break;if(out.some(o=>o.th===x.th||o.en===x.en))continue;out.push(x)}
+  return shuffle(out);
+}
+function mc(st,sg){
+  const it=st.it,os=opts(it),m=st.m;
+  const prompt=m==='th2en'?`<p class="kick">What does this mean?</p><div class="card" style="margin-bottom:18px"><div class="strip2"></div><p class="big th ${it.th.length>5?'sm':''}">${esc(it.th)}</p><p class="rom">${esc(it.ro)}</p>${sayBtn(it.th,'s')}</div>`
+   :m==='en2th'?`<p class="kick">How do you say it in Thai?</p><h2 class="q">${esc(it.en)}</h2>`
+   :`<p class="kick">Listen and choose</p><div style="text-align:center;margin:10px 0 22px">${sayBtn(it.th,'xl')}</div>`;
+  sg.innerHTML=prompt+`<div class="opts ${m==='th2en'?'':'two'}">${os.map((o,i)=>`<button class="opt" data-o="${i}"><span class="k">${i+1}</span>${m==='th2en'?`<span>${esc(o.en)}</span>`:`<span><span class="t th">${esc(o.th)}</span><span class="r">${esc(o.ro)}</span></span>`}</button>`).join('')}</div>`;
+  foot('','','Choose an answer',true);
+  sg.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{
+    if(SES.ans)return;SES.ans=true;const pick=os[+b.dataset.o],ok=pick.id===it.id;
+    sg.querySelectorAll('[data-o]').forEach(x=>{x.disabled=true;const o=os[+x.dataset.o];if(o.id===it.id)x.classList.add('right');else if(x===b)x.classList.add('wrong')});
+    result(ok,it.id,`<span class="th">${esc(it.th)}</span> · ${esc(it.ro)} · ${esc(it.en)}`,it.th);
+  });
+  onGo=()=>{if(SES.ans)next()};
+}
+function build(st,sg){
+  const s=st.s,ans=s.t.map(res),tiles=shuffle(ans.concat(s.x||[]).map((t,i)=>({th:t[0],ro:t[1],i})));let placed=[];
+  sg.innerHTML=`<p class="kick">Build the sentence</p><h2 class="q">${esc(s.en)}</h2><div class="slots" id="slots"></div><div class="bank" id="bk">${tiles.map(t=>`<button class="tile" data-t="${t.i}"><span class="t th">${esc(t.th)}</span><span class="r">${esc(t.ro)}</span></button>`).join('')}</div>`;
+  const draw=()=>{$('#slots').innerHTML=placed.map(t=>`<button class="tile" data-p="${t.i}"><span class="t th">${esc(t.th)}</span><span class="r">${esc(t.ro)}</span></button>`).join('');
+    sg.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('used',placed.some(p=>p.i===+b.dataset.t)));
+    sg.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{if(SES.ans)return;placed=placed.filter(p=>p.i!==+b.dataset.p);draw()});
+    foot('','','Check',placed.length===0)};
+  sg.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{if(SES.ans||b.classList.contains('used'))return;const t=tiles.find(x=>x.i===+b.dataset.t);placed.push(t);say(t.th);draw()});
+  draw();
+  onGo=()=>{if(SES.ans){next();return}if(!placed.length)return;SES.ans=true;
+    const got=placed.map(p=>p.th).join('|'),okA=[s.t].concat(s.alt||[]).some(a=>a.map(res).map(x=>x[0]).join('|')===got);
+    result(okA,null,`<span class="th">${esc(TH(s.t))}</span><br>${esc(RO(s.t))}`,TH(s.t));};
+}
+function result(ok,id,ansHtml,th){
+  SES.tot++;if(ok)SES.right++;if(id)grade(id,ok);save();say(th);
+  const st=SES.steps[SES.i];if(!ok&&!SES.retried.has(SES.i)){SES.retried.add(SES.steps.length);SES.steps.push(Object.assign({},st))}
+  foot(ok?'ok':'bad',ok?`<b>Correct!</b>${ansHtml}`:`<b>Not quite. The answer:</b>${ansHtml}`,'Continue');
+}
+function next(){SES.i++;if(SES.i>=SES.steps.length)finish();else{step();window.scrollTo(0,0)}}
+function finish(){
+  clearInterval(timer);const t=today();
+  if(S.last!==t){S.streak=S.last===addDays(-1)?S.streak+1:1;S.last=t}
+  if(SES.kind==='unit'){S.done[SES.n]=true;UNITS[SES.n].items.forEach(id=>{if(!S.learned[id])grade(id,true)})}
+  save();
+  const goal=CONFIG.goalMin*60,pct=SES.tot?Math.round(SES.right/SES.tot*100):100,n=nextUnit(),mm=Math.floor(S.secs/60)+':'+String(S.secs%60).padStart(2,'0');
+  $('#donebox').innerHTML=`<div class="card" style="max-width:300px;margin:8px auto 0;padding-top:30px"><div class="strip2"></div><p class="lbl">Day streak</p><p class="big" style="font-family:Kanit,sans-serif">${S.streak}</p><p class="th" style="font-size:24px;margin:0">เก่งมาก!</p><p class="rom" style="font-size:16px;margin:0">gèng mâak · Great job!</p></div>
+  <h1>${SES.kind==='unit'?'Unit '+(SES.n+1)+' complete':'Review complete'}</h1>
+  <p class="lbl">${S.secs>=goal?"You've done your "+CONFIG.goalMin+' minutes today.':'A little more practice reaches today\'s '+CONFIG.goalMin+' minutes.'}</p>
+  <div class="stats"><div><b>${SES.newN}</b><span>new words</span></div><div><b>${pct}%</b><span>correct</span></div><div><b>${mm}</b><span>today</span></div></div>
+  <div class="stack">${n>=0?`<button class="btn" id="dNext">Next: Unit ${n+1}</button>`:''}<button class="btn ${n>=0?'ghost':''}" id="dRev">Quick review</button><button class="btn ghost" id="dHome">Back to today</button></div>
+  ${CONFIG.lessonUrl?`<a class="cta" href="${esc(CONFIG.lessonUrl)}" target="_blank" rel="noopener">${esc(CONFIG.lessonLabel)}</a>`:''}`;
+  scr('donescr');
+  if($('#dNext'))$('#dNext').onclick=()=>startUnit(n);
+  $('#dRev').onclick=startReview;$('#dHome').onclick=home;
+}
+
+/* ---------- word bank ---------- */
+function bank(){
+  const q=$('#q').value.trim().toLowerCase();
+  $('#bank').innerHTML=GROUPS.map(([g,name])=>{const rows=RAW.map(r=>IT[r[0]]).filter(it=>it.g===g&&(!q||(it.th+' '+it.ro+' '+it.en).toLowerCase().includes(q)));
+    return rows.length?`<h3 class="grp">${esc(name)}</h3>`+rows.map(it=>`<div class="w ${S.learned[it.id]?'':'new'}"><div><div class="th">${esc(it.th)} <span class="r">${esc(it.ro)}</span></div><div class="e">${esc(it.en)}${it.note?`<small>${esc(it.note)}</small>`:''}</div></div>${sayBtn(it.th,'s')}</div>`).join(''):''}).join('')||'<p class="lbl">No words match.</p>';
+}
+
+/* ---------- settings ---------- */
+function setUI(){
+  document.querySelectorAll('[data-sg]').forEach(b=>b.classList.toggle('on',b.dataset.sg===S.g));
+  document.querySelectorAll('[data-ss]').forEach(b=>b.classList.toggle('on',(b.dataset.ss==='1')===!!S.sound));
+  $('#voiceNote').textContent=!('speechSynthesis' in window)?'This browser cannot play Thai sound.':voice?'Thai voice: '+voice.name+'.':'No Thai voice found on this device. Add one in your phone\'s settings (Accessibility › Spoken content › Voices › Thai) for better sound.';
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const sb=e.target.closest('[data-say]');if(sb){say(sb.dataset.say);return}
+  const u=e.target.closest('[data-u]');if(u){if(!S.g){$('#gpick').scrollIntoView({behavior:'smooth',block:'center'});return}u.dataset.u==='review'?startReview():startUnit(+u.dataset.u);return}
+  const g=e.target.closest('[data-g]');if(g){S.g=g.dataset.g;save();home();return}
+  const sg=e.target.closest('[data-sg]');if(sg){S.g=sg.dataset.sg;save();setUI();return}
+  const ss=e.target.closest('[data-ss]');if(ss){S.sound=ss.dataset.ss==='1';save();setUI();return}
+});
+$('#start').onclick=()=>{const n=nextUnit();n<0?startReview():startUnit(n)};
+$('#go').onclick=()=>{if(!$('#go').disabled&&onGo)onGo()};
+$('#quit').onclick=()=>{clearInterval(timer);save();home()};
+$('#toBank').onclick=()=>{bank();scr('bankscr')};
+$('#bankBack').onclick=home;
+$('#q').oninput=bank;
+$('#toSet').onclick=()=>{setUI();$('#setm').hidden=false};
+$('#setClose').onclick=()=>{$('#setm').hidden=true;home()};
+$('#setm').onclick=e=>{if(e.target.id==='setm'){$('#setm').hidden=true;home()}};
+let resetArm=false;
+$('#reset').onclick=()=>{if(!resetArm){resetArm=true;$('#reset').textContent='Tap again to erase everything';return}S=fresh();save();resetArm=false;$('#reset').textContent='Reset all progress';$('#setm').hidden=true;home()};
+document.addEventListener('keydown',e=>{
+  if($('#lesson').hidden)return;
+  if(/^[1-4]$/.test(e.key)){const b=document.querySelector('[data-o="'+(+e.key-1)+'"]');if(b&&!b.disabled)b.click()}
+  else if(e.key==='Enter'&&document.activeElement.tagName!=='BUTTON'){e.preventDefault();$('#go').click()}
+});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&!$('#home').hidden)home();save()});
+
+try{if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
+home();
+}
+</script>
+</body>
+</html>
